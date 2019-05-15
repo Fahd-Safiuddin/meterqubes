@@ -1,0 +1,8 @@
+{
+  "title": "Log In to Admin Panel",
+  "form": {
+    "email": "Your login",
+    "password": "Password",
+    "button": "Login"
+  }
+}

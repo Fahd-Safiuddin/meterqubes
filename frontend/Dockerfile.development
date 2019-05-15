@@ -1,0 +1,14 @@
+FROM node:10
+
+COPY . /var/www/build/
+
+WORKDIR /var/www/build/
+
+ENV API_URL=https://mq-back-dev.scenario-projects.com
+ENV SOCKET_URL=https://mq-socket-dev.scenario-projects.com
+
+RUN \
+   npm install &&\
+   npm run build
+
+CMD cp -rpv /var/www/build/src/static /var/www/front/ && npm run start

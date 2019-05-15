@@ -1,0 +1,156 @@
+{
+  "trade": {
+    "title": "Trade",
+    "tabs": ["Sell", "Buy"],
+    "order": {
+      "limit": {
+        "label": "Limit price",
+        "placeholder": "0.00"
+      },
+      "amount": {
+        "label": "Amount",
+        "placeholder": "0.00"
+      },
+      "total": "Total",
+      "weth": "WETH",
+      "buttonSell": "Sell {{ quoteToken }}",
+      "buttonBuy": "Buy {{ quoteToken }}"
+    },
+    "modal": {
+      "title": "Buy order confirmation",
+      "info": "Please confirm your buy order on Metamask extension"
+    },
+    "modalSuccess": {
+      "title": "Success!",
+      "text": [
+        "You`re order of {{ amountValue }} {{ amountMarket }} with a limit price of {{ priceValue }} {{ priceMarket }} was successfully added to the order book. You can check status of your open orders in the «orders» panel.",
+        "If you want to receive notifications when your order is filled, allow browser notifications from MeterQubes"
+      ],
+      "button": "OK"
+    },
+    "modalCanceled": {
+      "title": "Signature canceled",
+      "button": "OK"
+    },
+    "modalValueError": {
+      "title": "Incorrect value",
+      "text": "Price and amount must be greater than 0",
+      "button": "OK"
+    },
+    "modalSubmitError": {
+      "title": "Error",
+      "text": "{{ error }}",
+      "button": "OK"
+    }
+  },
+  "orderBook": {
+    "title": "Order Book",
+    "table": {
+      "rows": ["Size", "Price", "Amount", "Total"]
+    }
+  },
+  "balance": {
+    "eth": {
+      "title": "ETH Balance",
+      "placeholder": "0.00",
+      "button": "Wrap ETH"
+    },
+    "weth": {
+      "title": "WETH Balance",
+      "placeholder": "0.00",
+      "button": "Unwrap WETH"
+    },
+    "modalWrap": {
+      "title": "Transaction confirmation",
+      "wrap": "You`re about to wrap",
+      "text": [
+        "The quick, brown fox jumps over a lazy dog. DJs flock by when MTV ax quiz prog. Junk MTV quiz graced by fox whelps. Bawds jog, flick quartz, vex nymphs.",
+        "You can easily unwrap WETH by pressing «Unwrap WETH» button "
+      ],
+      "button": "Please confirm your transaction on your Metamask extension"
+    },
+    "modalWrapVerifying": {
+      "title": "Transaction verifying",
+      "wrap": "Wrapping",
+      "text": "Please wait untill we verify your transaction on the blockchain"
+    },
+    "modalWrapSuccess": {
+      "title": "Success!",
+      "wrapStart": "You`ve successfully wrapped",
+      "wrapEnd": "ETH to WETH",
+      "text": "The quick, brown fox jumps over a lazy dog. DJs flock by when MTV ax quiz prog. Junk MTV quiz graced by fox whelps. Bawds jog, flick quartz, vex nymphs.",
+      "button": "Trade now"
+    },
+    "modalUnwrap": {
+      "title": "Transaction confirmation",
+      "wrap": "You`re about to wrap",
+      "text": [
+        "The quick, brown fox jumps over a lazy dog. DJs flock by when MTV ax quiz prog. Junk MTV quiz graced by fox whelps. Bawds jog, flick quartz, vex nymphs."
+      ],
+      "button": "Please confirm your transaction on your Metamask extension"
+    },
+    "modalUnwrapVerifying": {
+      "title": "Transaction verifying",
+      "wrap": "Unwrapping",
+      "text": "Please wait untill we verify your transaction on the blockchain"
+    },
+    "modalUnwrapSuccess": {
+      "title": "Success!",
+      "wrapStart": "You`ve successfully unwrapped",
+      "wrapEnd": "WETH to ETH",
+      "text": "The quick, brown fox jumps over a lazy dog. DJs flock by when MTV ax quiz prog. Junk MTV quiz graced by fox whelps. Bawds jog, flick quartz, vex nymphs.",
+      "button": "OK"
+    },
+
+    "modalTransactionCanceled": {
+      "title": "Transaction canceled",
+      "button": "Close"
+    },
+    "modalError": {
+      "title": "Transaction error",
+      "button": "Close"
+    },
+    "modalBalanceError": {
+      "title": "Insufficient balance",
+      "text": "You have insufficient {{ currency }} on balance",
+      "button": "Close"
+    }
+  },
+  "header": {
+    "cols": ["Last Price", "24h Change", "24h Low", "24h Hight"]
+  },
+  "orders": {
+    "title": "Orders",
+    "tabs": ["Selling orders", "Buying orders", "All"],
+    "table": {
+      "rows": [
+        "Pair",
+        "Type",
+        "Price",
+        "Amount",
+        "Avaliable amount",
+        "Confirmed amount",
+        "Placed at"
+      ]
+    },
+    "placeholder": {
+      "textStart": "Login to your digital wallet and ",
+      "link": "verify your address",
+      "textEnd": "to view and edit your pending orders here"
+    }
+  },
+  "markets": {
+    "title": "Markets",
+    "table": {
+      "rows": ["Pair", "Last Price", "24H Vol", "24H Price"]
+    }
+  },
+  "history": {
+    "title": "Trade History",
+    "tabs": ["My trades", "All"],
+    "table": {
+      "rows": ["Date/Time", "Type", "Price", "Amount"]
+    }
+  },
+  "mobileTabs": ["Trade", "Markets", "Orders"]
+}

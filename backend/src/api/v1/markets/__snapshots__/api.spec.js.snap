@@ -1,0 +1,80 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Markets (API) get all markets with token "BNB" 1`] = `
+Array [
+  Object {
+    "amountDecimals": 2,
+    "asMakerFeeRate": "0.00100",
+    "asTakerFeeRate": "0.00300",
+    "baseToken": "BNB",
+    "baseTokenAddress": "0xb8c77482e45f1f44de1745f52c74426c631bdd52",
+    "baseTokenDecimals": 18,
+    "baseTokenName": "Binance Coin",
+    "baseTokenProjectUrl": "https://www.binance.com/",
+    "id": 1,
+    "marketOrderMaxSlippage": "0.10000",
+    "minOrderSize": "1.000000000000000000",
+    "priceDecimals": 8,
+    "pricePrecision": 5,
+    "quoteToken": "WETH",
+    "quoteTokenAddress": "0x251bbfa0abf2dc356a44f7af5e4d7a224a4ec01f",
+    "quoteTokenDecimals": 18,
+    "supportedOrderTypes": Array [
+      "LIMIT",
+    ],
+    "tokens": "BNB-WETH",
+  },
+]
+`;
+
+exports[`Markets (API) get all markets with token name "mk" 1`] = `
+Array [
+  Object {
+    "amountDecimals": 2,
+    "asMakerFeeRate": "0.00100",
+    "asTakerFeeRate": "0.00300",
+    "baseToken": "MKR",
+    "baseTokenAddress": "0x9f8f72aa9304c8b593d555f12ef6589cc3a579a2",
+    "baseTokenDecimals": 18,
+    "baseTokenName": "Maker",
+    "baseTokenProjectUrl": "https://makerdao.com/",
+    "id": 2,
+    "marketOrderMaxSlippage": "0.10000",
+    "minOrderSize": "0.005000000000000000",
+    "priceDecimals": 8,
+    "pricePrecision": 5,
+    "quoteToken": "WETH",
+    "quoteTokenAddress": "0x251bbfa0abf2dc356a44f7af5e4d7a224a4ec01f",
+    "quoteTokenDecimals": 18,
+    "supportedOrderTypes": Array [
+      "LIMIT",
+    ],
+    "tokens": "MKR-WETH",
+  },
+]
+`;
+
+exports[`Markets (API) get market with token Id=1 1`] = `
+Object {
+  "amountDecimals": 2,
+  "asMakerFeeRate": "0.00100",
+  "asTakerFeeRate": "0.00300",
+  "baseToken": "BNB",
+  "baseTokenAddress": "0xb8c77482e45f1f44de1745f52c74426c631bdd52",
+  "baseTokenDecimals": 18,
+  "baseTokenName": "Binance Coin",
+  "baseTokenProjectUrl": "https://www.binance.com/",
+  "id": 1,
+  "marketOrderMaxSlippage": "0.10000",
+  "minOrderSize": "1.000000000000000000",
+  "priceDecimals": 8,
+  "pricePrecision": 5,
+  "quoteToken": "WETH",
+  "quoteTokenAddress": "0x251bbfa0abf2dc356a44f7af5e4d7a224a4ec01f",
+  "quoteTokenDecimals": 18,
+  "supportedOrderTypes": Array [
+    "LIMIT",
+  ],
+  "tokens": "BNB-WETH",
+}
+`;

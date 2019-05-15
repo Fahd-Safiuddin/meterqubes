@@ -1,0 +1,21 @@
+{
+  "title": "Choose Currencies for Exchange",
+  "give": "Give",
+  "receive": "Receive",
+  "button": "Exchange",
+  "modalConfirm": {
+    "title": "Exchange confirmation",
+    "textStart": "You`re about to exchange",
+    "textEnd": "({{ from.tokenName}}) to ({{ to.tokenName}})",
+    "buttonConfirm": "Confirm",
+    "buttonCancel": "Cancel"
+  },
+  "modalSuccess": {
+    "title": "Success!",
+    "text": [
+      "{{ value }} ({{ from.tokenName }}) to ({{  to.tokenName }}) was successfully exchanged. You can check your balance by adding token address to your metamask wallet. ",
+      "{{ to.tokenName }} address: {{ to.tokenAddress }}"
+    ],
+    "button": "OK"
+  }
+}

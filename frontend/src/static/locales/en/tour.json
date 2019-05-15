@@ -1,0 +1,78 @@
+{
+  "welcome": {
+    "title": "Welcome!",
+    "text": "This quick tour to MeterQubes shows how to use platform to trade cryptocurrency directly from a wallet with this top-notch decentralized exchange. ",
+    "button": "Begin Tour"
+  },
+  "wrapEth": {
+    "title": "Wrap ETH",
+    "text": [
+      "MeterQubes currently supports trading between wrapped ETH (WETH)  and a few dozen ERC20 tokens.",
+
+      "WETH is a version of ETH that you can trade with ERC20 tokens.",
+
+      "Therefore, to trade ETH on MeterQubes, you need to first convert (also called “wrap”) your ETH into WETH. Select wrap ETH to get started."
+    ],
+    "buttonNext": "Next",
+    "buttonBack": "Back"
+  },
+  "orderBook": {
+    "title": "Order book",
+    "text": [
+      "The order book for the trading pair is displayed to the left. The top of the order book displays orders to buy the token for ETH in green text. The bottom of the order book displays orders to sell the token for ETH in red.",
+
+      "You can select a price in the order book to auto-fill it into the unit price field in the enter order box above the order book."
+    ],
+    "buttonNext": "Next",
+    "buttonBack": "Back"
+  },
+  "markets": {
+    "title": "Markets",
+    "text": [
+      "To start, the upper right is the markets section where you can select, search for, and filter through trading pairs. You can also add some pairs to your favorites which allows you to reach them very quickly.",
+
+      "It’s easy to view each coin’s price, 24-hour price change, and 24-hour volume."
+    ],
+    "buttonNext": "Next",
+    "buttonBack": "Back"
+  },
+  "trade": {
+    "title": "Trade",
+    "text": [
+      "Users enter buy and sell orders in a simple box on the left side of the screen.",
+
+      "MeterQubes uses an order matching model to execute trades, which means that when orders on opposite sides of the market overlap in price, MeterQubes fills these orders simultaneously by matching the counter-parties."
+    ],
+    "buttonNext": "Next",
+    "buttonBack": "Back"
+  },
+  "chart": {
+    "title": "Trading chart",
+    "text": [
+      "MeterQubes uses TradingView for its price chart. It provides a smooth interface to see price and volume movements on platform.",
+
+      "Further, more advanced traders on MeterQubes have access to many of the technical analysis tools and advanced indicators that professional traders use."
+    ],
+    "buttonNext": "Next",
+    "buttonBack": "Back"
+  },
+  "orders": {
+    "title": "Open orders",
+    "text": [
+      "MeterQubes displays your open orders just below the trading chart.",
+
+      "You can sort orders by «selling» or «buying»"
+    ],
+    "buttonNext": "Next",
+    "buttonBack": "Back"
+  },
+  "history": {
+    "title": "Trade history",
+    "text": [
+      "The trade history in the lower right can display all the trades for the selected trading pair or just your trades. It is an easy way to see how frequent the market is trading on MeterQubes."
+    ],
+    "buttonNext": "Next",
+    "buttonBack": "Back"
+  },
+  "buttonFinish": "Finish Tour"
+}

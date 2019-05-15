@@ -1,0 +1,44 @@
+version: "3.7"
+
+networks:
+  app-network:
+    name: app-network
+
+volumes:
+  app-pg-data:
+    name: app-pg-data
+
+services:
+  postgres:
+    image: postgres:10-alpine
+    container_name: app-postgres
+    restart: always
+    networks:
+    - app-network
+    ports:
+    - 5432:5432
+    volumes:
+    - type: volume
+      source: app-pg-data
+      target: /var/lib/postgresql/data
+    environment:
+      POSTGRES_DB: app_db
+      POSTGRES_PASSWORD: postgres
+
+  server:
+    container_name: app-server
+    restart: always
+    ports:
+    - 3000:3000
+    build: .
+    volumes:
+    - ./src:/home/node/src
+    - /home/node/node_modules
+    - ./swagger.yml:/home/node/swagger.yml
+    networks:
+    - app-network
+    links:
+    - postgres
+    environment:
+      DEV_ENV: 'docker'
+      NPM_CONFIG_LOGLEVEL: 'warn'

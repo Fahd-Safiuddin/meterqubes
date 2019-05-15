@@ -1,0 +1,51 @@
+{
+  "mainInfo": {
+    "transaction": {
+      "title": "Set transaction Fee"
+    },
+    "exchange": {
+      "title": "Set exchange Fee"
+    },
+    "voting": {
+      "title": "Set voting Fee"
+    },
+    "votingLimit": {
+      "title": "Set voting limit"
+    },
+    "buttons": {
+      "save": "Save",
+      "copy": "Copy"
+    },
+    "wallet": {
+      "title": "Fees Wallet",
+      "currentBalance": "Current Balance",
+      "address": "Address",
+      "buttonCopy": "Copy"
+    }
+  },
+  "addToken": {
+    "title": "Add Token",
+    "description": "To be listed in the MeterQubes platform as an ICO please fill out the form below and you will be contacted by someone at MeterQubes to confirm.",
+    "form": {
+      "tokenName": "Token Name & Ticker Symbol",
+      "logo": "Logo",
+      "smartContract": "Smart Contract Address",
+      "decimals": "Decimals",
+      "button": "Submit"
+    }
+  },
+  "wallets": {
+    "title": "Wallets",
+    "balance": "Total",
+    "table": {
+      "rows": ["Address"]
+    }
+  },
+  "transactions": {
+    "title": "Transactions",
+    "tabs": ["Sell", "Buy", "Exchange", "All"],
+    "table": {
+      "rows": ["Pair", "Type", "Price", "Amount", "Date/Time"]
+    }
+  }
+}

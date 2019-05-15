@@ -1,0 +1,13 @@
+const ORDER_TYPE = {
+  LIMIT: 'LIMIT',
+  MARKET: 'MARKET',
+}
+
+const MAKER_REBATE_RATE = 100
+const FEE_RATE_BASE = 100000
+
+module.exports = {
+  ORDER_TYPE,
+  MAKER_REBATE_RATE,
+  FEE_RATE_BASE,
+}

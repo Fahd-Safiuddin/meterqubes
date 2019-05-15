@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Hello!</title>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+</head>
+<body>
+<h1>Hi there!</h1>
+
+<p>
+    I'm your cool new webpage.
+</p>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.1.1/socket.io.js"></script>
+<script>
+
+    // let socket = io.connect('http://localhost:4337');// local server
+    let socket = io.connect('https://mq-socket-dev.scenario-projects.com');// develop server
+
+    const tokenUser3 = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJwYXlsb2FkIjp7ImlkIjozLCJwdWJsaWNBZGRyZXNzIjoiMHg3NjgzZGRiNzQ1MWQ2ODRkMzIwYmFmN2FhYmNkMDI5OGE4Yzk0MWRhIn0sImlhdCI6MTU1NTc2NTkzNH0.H8DqRZS3bnpQ76atK33vedQh5KgX888BteGjJgLrD0I'
+    const tokenUser2 = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJwYXlsb2FkIjp7ImlkIjoyLCJwdWJsaWNBZGRyZXNzIjoiMHg5NjI0MTE4NmNhNGFhNzlmNWJkNTkzYTAyYzI5YTM4ZGE3ODUyNTFlIn0sImlhdCI6MTU1NDkwNjQ0Mn0.WbcSZBgemIoBRvyv9XdlO_SWl3aL5jmL3UgB4mL36FA'
+    const tokenUser1 = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJwYXlsb2FkIjp7ImlkIjoxLCJwdWJsaWNBZGRyZXNzIjoiMHg5NjI0MTE4NmNhNGFhNzlmNWJkNTkzYTAyYzI5YTM4ZGE3ODUyNTFlIn0sImlhdCI6MTU1NTQyMzE2Mn0.lVzu2XbZ98Cj73wOW7phe5py-LT_uq1uFlaQpjsYqho'
+
+    socket.on('connect', () =>{
+        console.log('Connect established=');
+
+        socket.emit('auth', {accessToken: 'Bearer ' + tokenUser1})
+    });
+
+    socket.on('newTrade', function(data){
+        console.log('newTrade fired. data=', data);
+    });
+
+    socket.on('newOrder', function(data){
+        console.log('newOrder fired. data=', data);
+    });
+
+    socket.on('dashboard', function(data){
+        console.log('dashboard fired. data=', data);
+    });
+    socket.on('orderChanged', function(data){
+        console.log('orderChanged fired. data=', data);
+    });
+
+    //
+    // NEW_TRADE: 'newTrade',
+    //   NEW_ORDER: 'newOrder',
+    //   DASHBOARD_UPDATE: 'dashboard',
+    //   ORDER_CHANGED: 'orderChanged',
+
+</script>
+</body>
+</html>

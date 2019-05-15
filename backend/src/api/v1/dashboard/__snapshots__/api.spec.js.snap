@@ -1,0 +1,72 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Dashboard (API) get landing dashboard. All markets 1`] = `
+Array [
+  Object {
+    "changeRate": "0.00",
+    "lastPrice": "0.00",
+    "token": "KCS",
+  },
+  Object {
+    "changeRate": "0.00",
+    "lastPrice": "0.00",
+    "token": "ZRX",
+  },
+  Object {
+    "changeRate": "0.00",
+    "lastPrice": "0.00",
+    "token": "BNB",
+  },
+  Object {
+    "changeRate": "0.00",
+    "lastPrice": "0.00",
+    "token": "OMG",
+  },
+  Object {
+    "changeRate": "0.00",
+    "lastPrice": "0.00",
+    "token": "HOT",
+  },
+  Object {
+    "changeRate": "0.00",
+    "lastPrice": "0.00",
+    "token": "ENJ",
+  },
+  Object {
+    "changeRate": "0.00",
+    "lastPrice": "0.00",
+    "token": "MKR",
+  },
+  Object {
+    "changeRate": "0.00",
+    "lastPrice": "0.00",
+    "token": "BAT",
+  },
+  Object {
+    "changeRate": "0.00",
+    "lastPrice": "0.00",
+    "token": "LINK",
+  },
+  Object {
+    "changeRate": "0.00",
+    "lastPrice": "0.00",
+    "token": "WTC",
+  },
+  Object {
+    "changeRate": "1.71",
+    "lastPrice": "0.356000000",
+    "token": "EMPR",
+  },
+]
+`;
+
+exports[`Dashboard (API) get trade dashboard by market id 1`] = `
+Object {
+  "changeRate": "1.71",
+  "firstPrice": "0.350000000",
+  "highPrice": "0.500000000",
+  "lastPrice": "0.356000000",
+  "lowPrice": "0.350000000",
+  "priceChange": "0.006000000",
+}
+`;

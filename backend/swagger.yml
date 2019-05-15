@@ -1,0 +1,1094 @@
+openapi: 3.0.2
+info:
+  version: 0.2.0
+  title: MeterQubes
+  description: |
+    ## MeterQubes API Documentation
+  contact:
+    email: eromanenko@s-pro.io
+servers:
+  - url: /
+    description: Local server
+paths:
+  /api/v1:
+    get:
+      description: Returns welcome message
+      summary: Welcome to the API v1
+      tags:
+        - general
+      operationId: welcomeMessage
+      responses:
+        '200':
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                type: string
+                example: Welcome to the MeterQubes!
+
+  /api/v1/auth:
+    post:
+      description: authorization
+      summary: Authorization
+      tags:
+        - auth
+      operationId: Authorization
+      responses:
+        '200':
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                type: string
+      requestBody:
+        $ref: '#/components/requestBodies/AuthBody'
+
+  /api/v1/users:
+    get:
+      description: find users by publicAddress
+      summary: Find user
+      tags:
+        - users
+      parameters:
+        - in: query
+          name: publicAddress
+          required: true
+          schema:
+            type: string
+      operationId: findUser
+      responses:
+        '200':
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/User'
+        '401':
+          description: You are not signed in
+        '404':
+          description: User not found
+    post:
+      description: create users
+      summary: Create user
+      tags:
+        - users
+      operationId: createUser
+      responses:
+        '200':
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/User'
+      requestBody:
+        $ref: '#/components/requestBodies/CreateUserBody'
+
+  /api/v1/users/{userId}:
+    get:
+      description: find user by userId
+      summary: Find user
+      security:
+        - bearerAuth: []
+      tags:
+        - users
+      parameters:
+        - in: path
+          name: userId
+          required: true
+          schema:
+            type: integer
+      operationId: getUser
+      responses:
+        '200':
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/User'
+        '404':
+          description: User not found
+    patch:
+      description: update users
+      summary: Update user
+      security:
+        - bearerAuth: []
+      tags:
+        - users
+      parameters:
+        - in: path
+          name: userId
+          required: true
+          schema:
+            type: integer
+      operationId: updateUser
+      responses:
+        '200':
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/User'
+        '404':
+          description: User not found
+      requestBody:
+        $ref: '#/components/requestBodies/UpdateUserBody'
+
+  /api/v1/orders:
+    post:
+      description: create order
+      summary: Create order
+      tags:
+        - orders
+      operationId: createOrder
+      responses:
+        '200':
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  id:
+                    type: string
+      requestBody:
+        $ref: '#/components/requestBodies/CreateOrderBody'
+
+  /api/v1/orders/user/{marketId}:
+    get:
+      description: Find user orders
+      summary: Find user orders
+      security:
+        - bearerAuth: []
+      tags:
+        - orders
+      parameters:
+        - in: path
+          name: marketId
+          required: true
+          schema:
+            type: integer
+      operationId: getUserOrders
+      responses:
+        '200':
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  id:
+                    description: primary key
+                    type: integer
+                  side:
+                    description: buy or sell
+                    type: string
+                    enum: [BUY, SELL]
+                  amount:
+                    type: number
+                  price:
+                    type: number
+                  availabelAmount:
+                    type: number
+                  confirmedAmount:
+                    type: number
+                  createdAt:
+                    type: string
+                    format: date
+                  market:
+                    type: object
+                    properties:
+                      tokens:
+                        type: string
+  /api/v1/orders/match/{orderId}:
+    put:
+      description: Find orders to match
+      summary: Find orders to match
+      security:
+        - bearerAuth: []
+      tags:
+        - orders
+      parameters:
+        - in: path
+          name: orderId
+          required: true
+          schema:
+            type: integer
+      operationId: findAndProcessMatchedOrders
+      responses:
+        '204':
+          description: Successful operation
+        '401':
+          description: You are not signed in
+
+  /api/v1/orders/order/{orderId}:
+    get:
+      description: get order by orderId
+      summary: Get order by orderId
+      security:
+        - bearerAuth: []
+      tags:
+        - orders
+      parameters:
+        - in: path
+          name: orderId
+          required: true
+          schema:
+            type: integer
+      operationId: getOrderById
+      responses:
+        '200':
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Order'
+    patch:
+      description: cancel order
+      summary: Cancel order
+      security:
+        - bearerAuth: []
+      tags:
+        - orders
+      parameters:
+        - in: path
+          name: orderId
+          required: true
+          schema:
+            type: integer
+      operationId: cancelOrder
+      responses:
+        '200':
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Order'
+      requestBody:
+        $ref: '#/components/requestBodies/CancelOrderBody'
+
+  /api/v1/markets:
+    get:
+      description: find markets by token symbol
+      summary: Find markets by token symbol (or get all markets)
+      tags:
+        - markets
+      parameters:
+        - in: query
+          name: token
+          required: false
+          schema:
+            type: string
+      operationId: findMarketsByToken
+      responses:
+        '200':
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Market'
+        '401':
+          description: You are not signed in
+    post:
+      description: create market
+      summary: Create market
+      tags:
+        - markets
+      operationId: createMarket
+      responses:
+        '200':
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Market'
+      requestBody:
+        $ref: '#/components/requestBodies/CreateMarketBody'
+    patch:
+      description: delete market
+      summary: Delete market
+      security:
+        - bearerAuth: []
+      tags:
+        - markets
+      parameters:
+        - in: query
+          name: marketId
+          required: true
+          schema:
+            type: integer
+      operationId: deleteMarket
+      responses:
+        '200':
+          description: Successful operation
+      requestBody:
+        $ref: '#/components/requestBodies/DeleteMarketBody'
+
+  /api/v1/markets/{marketId}:
+    get:
+      description: get market by marketId
+      summary: Get market by marketId
+      tags:
+        - markets
+      parameters:
+        - in: path
+          name: marketId
+          required: true
+          schema:
+            type: integer
+      operationId: getMarketById
+      responses:
+        '200':
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Market'
+    patch:
+      description: update market
+      summary: Update market
+      security:
+        - bearerAuth: []
+      tags:
+        - markets
+      parameters:
+        - in: path
+          name: marketId
+          required: true
+          schema:
+            type: integer
+      operationId: updateMarket
+      responses:
+        '200':
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Market'
+      requestBody:
+        $ref: '#/components/requestBodies/UpdateMarketBody'
+  /api/v1/data/relayer:
+    get:
+      description: get relayer
+      summary: get relayer
+      tags:
+        - data
+      operationId: getRelayer
+      responses:
+        '200':
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  relayer:
+                    type: string
+        '400':
+          description: You are not signed in
+  /api/v1/trade/history/{marketId}:
+    get:
+      description: get trade history
+      summary: get trade history
+      tags:
+        - trade
+      parameters:
+        - in: path
+          name: marketId
+          required: true
+          schema:
+            type: integer
+      operationId: getTradeHistory
+      responses:
+        '200':
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  marketId:
+                    type: integer
+                  data:
+                    type: object
+                    properties:
+                      date:
+                        type: array
+                        description: date= "18/04/2019"
+                        items:
+                          type: object
+                          properties:
+                            id:
+                              type: integer
+                              description: transaction ID
+                            amount:
+                              type: string
+                            price:
+                              type: string
+                            side:
+                              type: string
+                              enum: ['BUY','SELL']
+                            createdAt:
+                              type: string
+                              format: date
+  /api/v1/trade/user-history/{marketId}:
+    get:
+      description: get user trade history
+      summary: get user trade history
+      tags:
+        - trade
+      parameters:
+        - in: path
+          name: marketId
+          required: true
+          schema:
+            type: integer
+      operationId: getUserTradeHistory
+      responses:
+        '200':
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  marketId:
+                    type: integer
+                  data:
+                    type: object
+                    properties:
+                      date:
+                        type: array
+                        description: date= "18/04/2019"
+                        items:
+                          type: object
+                          properties:
+                            id:
+                              type: integer
+                              description: transaction ID
+                            amount:
+                              type: string
+                            price:
+                              type: string
+                            side:
+                              type: string
+                              enum: ['BUY','SELL']
+                            createdAt:
+                              type: string
+                              format: date
+  /api/v1/order-book/history/{marketId}:
+    get:
+      description: get order book history
+      summary: get order book history
+      tags:
+        - orderBook
+      parameters:
+        - in: path
+          name: marketId
+          required: true
+          schema:
+            type: integer
+      operationId: getOrderBookHistoryByMarketId
+      responses:
+        '200':
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  marketId:
+                    type: integer
+                  BUY:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        amount:
+                          type: string
+                        price:
+                          type: string
+                        myAmount:
+                          type: string
+                  SELL:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        amount:
+                          type: string
+                        price:
+                          type: string
+                        myAmount:
+                          type: string
+  /api/v1/order-book/history:
+    get:
+      description: get order book history for all markets
+      summary: get order book history for all markets
+      tags:
+        - orderBook
+      operationId: getOrderBookHistoryAllMarkets
+      responses:
+        '200':
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    marketId:
+                      type: integer
+                    token:
+                      type: string
+                    lastPrice:
+                      type: string
+                    amount:
+                      type: string
+                    changeRate:
+                      type: string
+  /api/v1/dashboard/trade/{marketId}:
+    get:
+      description: get trade dashboard data
+      summary: get trade dashboard data
+      tags:
+        - dashboard
+      parameters:
+        - in: path
+          name: marketId
+          required: true
+          schema:
+            type: integer
+      operationId: getTradeDashboard
+      responses:
+        '200':
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  lastPrice:
+                    type: string
+                  firstPrice:
+                    type: string
+                  changeRate:
+                    type: string
+                  priceChange:
+                    type: string
+                  highPrice:
+                    type: string
+                  lowPrice:
+                    type: string
+  /api/v1/dashboard/landing:
+    get:
+      description: get landing dashboard data
+      summary: get landing dashboard data
+      tags:
+        - dashboard
+      operationId: getLandingDashboard
+      responses:
+        '200':
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    token:
+                      type: string
+                    lastPrice:
+                      type: string
+                    changeRate:
+                      type: string
+  /api/v1/chart:
+    get:
+      description: get chart data for the period
+      summary: get chart data for the period
+      tags:
+        - dashboard
+      parameters:
+        - in: query
+          name: marketId
+          required: true
+          schema:
+            type: integer
+        - in: query
+          name: period
+          required: true
+          description: period in days
+          schema:
+            type: integer
+      operationId: getChartDataForPeriod
+      responses:
+        '200':
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: array
+                  items:
+                    type: string
+  /api/v1/favorites:
+    get:
+      description: get user favorites markets
+      summary: get user favorites markets
+      tags:
+        - favorites
+      operationId: getUserFavorites
+      responses:
+        '200':
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    id:
+                      type: integer
+                      description: ids of favorites markets
+        '401':
+          description: You are not signed in
+  /api/v1/favorites/{marketId}:
+    delete:
+      description: delete market from user favorites
+      summary: delete market from user favorites
+      tags:
+        - favorites
+      parameters:
+        - in: path
+          name: marketId
+          required: true
+          schema:
+            type: integer
+      operationId: removeFromUserFavorites
+      responses:
+        '204':
+          description: Market successfully removed from user favorites
+        '401':
+          description: You are not signed in
+    put:
+      description: add market to user favorites
+      summary: add market to user favorites
+      tags:
+        - favorites
+      parameters:
+        - in: path
+          name: marketId
+          required: true
+          schema:
+            type: integer
+      operationId: addToUserFavorites
+      responses:
+        '204':
+          description: Market successfully added to user favorites
+        '401':
+          description: You are not signed in
+components:
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+  requestBodies:
+    CreateUserBody:
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              publicAddress:
+                description: Users's public address
+                type: string
+              username:
+                description: User's name or email
+                type: string
+            required:
+              - publicAddress
+      required: true
+    UpdateUserBody:
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              publicAddress:
+                description: Users's public address
+                type: string
+              username:
+                description: User's email
+                type: string
+            required:
+              - publicAddress
+              - username
+    AuthBody:
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              publicAddress:
+                description: Users's public address
+                type: string
+              signature:
+                type: string
+            required:
+              - publicAddress
+    CreateOrderBody:
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              tokens:
+                type: string
+                description: pair of market tokens to exchange e.g. "EMPRO-WETH"
+              trader:
+                type: string
+                description: publicAddress of trader starts 0x...
+              baseTokenAmount:
+                type: integer
+                description: amount to exchange
+              quoteTokenAmount:
+                type: integer
+                description: amount to get
+              gasTokenAmount:
+                type: integer
+                description: gas amount
+              data:
+                type: string
+                description: order data in hex
+              signature:
+                type: object
+                properties:
+                  config:
+                    type: string
+                  r:
+                    type: string
+                  s:
+                    type: string
+            required:
+              - tokens
+              - trader
+              - baseTokenAmount
+              - quoteTokenAmount
+              - gasTokenAmount
+              - data
+      required: true
+    CancelOrderBody:
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              orderId:
+                description: primary key
+                type: integer
+            required:
+              - orderId
+      required: true
+
+    CreateMarketBody:
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              tokens:
+                description: base-qoute tokens pair (uppercase)
+                type: string
+              baseTokenProjectUrl:
+                description: base token project URL
+                type: string
+              baseTokenName:
+                description: base token full name
+                type: string
+              baseTokenDecimals:
+                description: decimals of base token amount
+                type: integer
+                maximum: 18
+              baseTokenAddress:
+                description: Ethereum address of base token (lowercase)
+                type: string
+              quoteTokenDecimals:
+                description: decimals of qoute token amount
+                type: integer
+                maximum: 18
+              quoteTokenAddress:
+                description: Ethereum address of qoute token (lowercase)
+                type: string
+              minOrderSize:
+                description: minimum order size
+                type: number
+              pricePrecision:
+                description: max amount of price significant digits
+                type: integer
+              priceDecimals:
+                description: max amount of price decimals
+                type: integer
+              amountDecimals:
+                description: max amount of decimals of token amount number
+                type: integer
+              asMakerFeeRate:
+                description: maker fee rate, base 100000 (ex 0.00100)
+                type: string
+              asTakerFeeRate:
+                description: taker fee rate, base 100000 (ex 0.00300)
+                type: string
+              supportedOrderTypes:
+                description: market, limit or both
+                type: array
+                items:
+                  type: string
+                  enum: [limit, market]
+              marketOrderMaxSlippage:
+                description: max order execution price slippage
+                type: string
+            required:
+              - tokens
+              - baseTokenProjectUrl
+              - baseTokenName
+              - baseTokenDecimals
+              - baseTokenAddress
+              - quoteTokenDecimals
+              - quoteTokenAddress
+              - minOrderSize
+              - pricePrecision
+              - priceDecimals
+              - amountDecimals
+              - asMakerFeeRate
+              - asTakerFeeRate
+              - supportedOrderTypes
+              - marketOrderMaxSlippage
+      required: true
+
+    UpdateMarketBody:
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              tokens:
+                description: base-qoute tokens pair (uppercase)
+                type: string
+              baseTokenProjectUrl:
+                description: base token project URL
+                type: string
+              baseTokenName:
+                description: base token full name
+                type: string
+              baseTokenDecimals:
+                description: decimals of base token amount
+                type: integer
+                maximum: 18
+              baseTokenAddress:
+                description: Ethereum address of base token (lowercase)
+                type: string
+              quoteTokenDecimals:
+                description: decimals of qoute token amount
+                type: integer
+                maximum: 18
+              quoteTokenAddress:
+                description: Ethereum address of qoute token (lowercase)
+                type: string
+              minOrderSize:
+                description: minimum order size
+                type: number
+              pricePrecision:
+                description: max amount of price significant digits
+                type: integer
+              priceDecimals:
+                description: max amount of price decimals
+                type: integer
+              amountDecimals:
+                description: max amount of decimals of token amount number
+                type: integer
+              asMakerFeeRate:
+                description: maker fee rate, base 100000 (ex 0.00100)
+                type: string
+              asTakerFeeRate:
+                description: taker fee rate, base 100000 (ex 0.00300)
+                type: string
+              supportedOrderTypes:
+                description: market, limit, or both
+                type: array
+                items:
+                  type: string
+                  enum: [limit, market]
+              marketOrderMaxSlippage:
+                description: max order execution price slippage
+                type: string
+            required:
+              - tokens
+              - baseTokenProjectUrl
+              - baseTokenName
+              - baseTokenDecimals
+              - baseTokenAddress
+              - quoteTokenDecimals
+              - quoteTokenAddress
+              - minOrderSize
+              - pricePrecision
+              - priceDecimals
+              - amountDecimals
+              - asMakerFeeRate
+              - asTakerFeeRate
+              - supportedOrderTypes
+              - marketOrderMaxSlippage
+      required: true
+
+    DeleteMarketBody:
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              marketId:
+                description: primary key
+                type: integer
+            required:
+              - marketId
+      required: true
+
+  schemas:
+    User:
+      title: User
+      type: object
+      properties:
+        id:
+          description: primary key
+          type: integer
+        nonce:
+          description: BE-generated random string
+          type: integer
+        publicAddress:
+          description: pulled from Metamask
+          type: string
+        username:
+          description: email
+          type: string
+        createdAt:
+          description: timestamp
+          type: string
+          format: date
+        updatedAt:
+          description: timestamp
+          type: string
+          format: date
+    Order:
+      title: Order
+      type: object
+      properties:
+        id:
+          description: primary key
+          type: integer
+        userId:
+          description: userId of order creater
+          type: integer
+        marketId:
+          description: marketId of the order
+          type: integer
+        side:
+          description: buy or sell
+          type: string
+          enum: [BUY, SELL]
+        isMarketOrder:
+          description: market or limit
+          type: boolean
+        amount:
+          description: base token amount
+          type: number
+        price:
+          description: price
+          type: number
+        expiresAt:
+          description: order expiration time (Unix)
+          type: string
+        status:
+          description: order status
+          type: string
+          enum: [PENDING, CANCELED, MATCHING, PARTIALLY_FILLED, FULL_FILLED']
+        createdAt:
+          description: timestamp
+          type: string
+          format: date
+        updatedAt:
+          description: timestamp
+          type: string
+          format: date
+    Market:
+      title: Market
+      type: object
+      properties:
+        id:
+          description: primary key
+          type: integer
+        tokens:
+          description: tokens pair
+          type: string
+        baseToken:
+          description: first (base) token symbol
+          type: string
+        baseTokenProjectUrl:
+          description: base token project URL
+          type: string
+        baseTokenName:
+          description: base token full name
+          type: string
+        baseTokenDecimals:
+          description: token amount decimals, usually 18
+          type: integer
+          maximum: 18
+        baseTokenAddress:
+          description: base token Ethereum address
+          type: string
+        quoteToken:
+          description: second (quote) token symbol
+          type: string
+        quoteTokenDecimals:
+          description: token amount decimals, usually 18
+          type: integer
+          maximum: 18
+        quoteTokenAddress:
+          description: quote token Ethereum address
+          type: string
+        minOrderSize:
+          description: minimum order size
+          type: string
+        pricePrecision:
+          description: max amount of price significant digits
+          type: integer
+        priceDecimals:
+          description: max amount of price decimals
+          type: integer
+        amountDecimals:
+          description: max amount of amount decimals
+          type: integer
+        asMakerFeeRate:
+          description: maker fee rate, ex 0.00100
+          type: string
+        asTakerFeeRate:
+          description: taker fee rate, ex 0.00300
+          type: string
+        supportedOrderTypes:
+          description: market, limit or both
+          type: array
+          items:
+            type: string
+            enum: [LIMIT, MARKET]
+        marketOrderMaxSlippage:
+          description: max execution price slippage
+          type: string
+        createdAt:
+          description: timestamp
+          type: string
+          format: date
+        updatedAt:
+          description: timestamp
+          type: string
+          format: date

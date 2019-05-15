@@ -1,0 +1,17 @@
+version: "3.7"
+
+networks:
+  app-network:
+    name: app-network
+
+services:
+  mq_socket:
+    build: .
+    container_name: mq_socket
+    ports:
+     - "4337:4337"
+    volumes:
+     - ./src:/mq/src
+    env_file: ".env"
+    networks:
+    - app-network

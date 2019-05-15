@@ -1,0 +1,58 @@
+{
+  "banner": {
+    "title": "MeterQubes Solutions",
+    "text": "A Decentralized Exchanging and Trading Platform",
+    "trading": {
+      "title": "Trading",
+      "text": "A very bad quack might jinx zippy fowls. Few quips galvanized the mock jury box. Quick brown dogs jump over the lazy fox.",
+      "button": "Start Trading"
+    },
+    "exchange": {
+      "title": "Exchange",
+      "text": "A very bad quack might jinx zippy fowls. Few quips galvanized the mock jury box. Quick brown dogs jump over the lazy fox.",
+      "button": "Exchange Tokens"
+    }
+  },
+  "getStarted": {
+    "title": "New Age of Trading With MeterQubes",
+    "text": "The quick, brown fox jumps over a lazy dog. DJs flock by when MTV ax quiz prog. Junk MTV quiz graced by fox whelps. Bawds jog, flick quartz, vex nymphs.",
+    "button": "Get Started"
+  },
+  "anotherBlock": {
+    "media": {
+      "title": "Another Block title",
+      "text": "The quick, brown fox jumps over a lazy dog. DJs flock by when MTV ax quiz prog. Junk MTV quiz graced by fox whelps. Bawds jog, flick quartz, vex nymphs."
+    },
+    "articleTop": "The quick, brown fox jumps over a lazy dog.",
+    "articleBottom": "The quick, brown fox jumps over a lazy dog."
+  },
+  "instant": {
+    "title": "Instant any Token to Token Exchange",
+    "grid": [
+      {
+        "title": "Future One",
+        "text": "The quick, brown fox jumps over a lazy dog."
+      },
+      {
+        "title": "Second Feature",
+        "text": "The quick, brown fox jumps over a lazy dog."
+      },
+      {
+        "title": "Feature No Three",
+        "text": "The quick, brown fox jumps over a lazy dog."
+      },
+      {
+        "title": "Future One",
+        "text": "The quick, brown fox jumps over a lazy dog."
+      },
+      {
+        "title": "Second Feature",
+        "text": "The quick, brown fox jumps over a lazy dog."
+      },
+      {
+        "title": "Feature No Three",
+        "text": "The quick, brown fox jumps over a lazy dog."
+      }
+    ]
+  }
+}
